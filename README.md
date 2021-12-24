@@ -18,3 +18,4 @@ Assuming you've set it up correctly using SteamCMD under it's own user and home 
 * **restart** - Automates a restart of the server, using the parameters at the top of the script.
 * **shutdown** - Sends a kill request to the TMUX session that the 
 * **update** - Runs SteamCMD and checks for any updates to the DayZ Dedicated Server/Dedicated Server Expirmental builds and applies updates if necessary.
+* **wipe** - Automates deleting server data to start fresh. Has checks in place to make sure people know what they're doing before they screw it up.
