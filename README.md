@@ -3,9 +3,7 @@ Simple shell script to to assist with the automation of DayZ Dedicated Servers o
 
 ### Requirements
 * SteamCMD to be installed per instructions [here](https://developer.valvesoftware.com/wiki/SteamCMD).
-* TMUX to be installed
-** ``sudo apt update``
-** ``sudo apt install tmux``
+* TMUX to be installed (copypasta this into Terminal:``sudo apt update && sudo apt install tmux -y``
 * Some level of understanding of shell/bash scripting.
 
 ### Usage
