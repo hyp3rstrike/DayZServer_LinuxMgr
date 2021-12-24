@@ -14,17 +14,17 @@ cores='1' # Sets how many cores of your server CPU to use. Should always be a lo
 # [!] DO NOT ALTER ANYTHING BEYOND THIS LINE [!]
 
 # Starts the DayZ Dedicated Server for Linux
-start () {
+startServer () {
     cd .steam/steamapps/common/"$folder" || return
     tmux new-session -d -s "$session"
-    tmux send-keys -t "$session" "./DayZServer -config=$config -port=$port -limitFPS=$fps -cpuCount=$cores"
+    tmux send-keys -t "$session" "./DayZServer -config=$config -port=$port -limitFPS=$fps -cpuCount=$cores" Enter
     echo "INFO: Starting DayZ server. Please wait."
     sleep 10
     echo "INFO: Your server should now be ready to play. Please check the DayZ game client."
 }
 
 # Restarts the DayZ Dedicated Server for Linux
-restart () {
+restartServer () {
     tmux kill-session -t "$session"
     echo "INFO: Stopping DayZ server without notice. Players might be pissed."
     sleep 10
@@ -32,14 +32,14 @@ restart () {
     sleep 10
     cd .steam/steamapps/common/"$folder" || return
     tmux new-session -d -s "$session"
-    tmux send-keys -t "$session" "./DayZServer " echo "$(cat params.txt)"
+    tmux send-keys -t "$session" "./DayZServer -config=$config -port=$port -limitFPS=$fps -cpuCount=$cores" Enter
     echo "INFO: Starting DayZ server. Please wait."
     sleep 10
     echo "INFO: Your server should now be ready to play. Please check the DayZ game client."
 }
 
 # Shutsdown the DayZ Dedicated Server for Linux, kinda like you evertim in League of Legends
-shutdown () {
+shutdownServer () {
     tmux kill-session -t "$session"
     echo "INFO: Stopping DayZ server without notice. Players might be pissed."
     sleep 10
@@ -47,7 +47,32 @@ shutdown () {
 }
 
 # Checks SteamCMD for an update to DayZ Server or DayZ Server Exp
-update () {
+updateServer () {
     steamcmd +login anonymous +app_update $appid validate +quit
     echo "Update has been completed. You can now start your server."
 }
+
+helpText ()
+{
+   echo ""
+   echo "Usage: ./dayzserver.sh [OPTION]"
+   echo -e "\tSTART Starts the DayZ Dedicated Server for Linux"
+   echo -e "\tRESTART Restarts the DayZ Dedicated Server for Linux"
+   echo -e "\tSHUTDOWN Shutsdown the DayZ Dedicated Server for Linux, kinda like you evertim in League of Legends"
+   echo -e "\tUPDATE Checks SteamCMD for an update to DayZ Server or DayZ Server Exp"
+   exit 1 # Exit script after printing help
+}
+
+read input 
+if [[ $input == "start" ]]; then
+    startServer
+fi
+if [[ $input == "restart" ]]; then
+    restartServer
+fi
+if [[ $input == "shutdown" ]]; then
+    shutdownServer
+fi
+if [[ $input == "update" ]]; then
+    updateServer
+fi
