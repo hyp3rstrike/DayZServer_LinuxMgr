@@ -3,7 +3,7 @@
 # (c) Dec 2021 HYP3RSTRIKE.
 
 # [!] SET YOUR LAUNCH VARIABLES HERE [!]
-global var session='DayZ' # Sets the name of the TMUX session so you can easily find it
+session='DayZ' # Sets the name of the TMUX session so you can easily find it
 folder='DayZ Server Exp' # Sets the directory of where your server files are.
 appid='1042420' # AppID for the Dedicated Server on Steam. Use either '223350' for main or '1042420' for Experimental.
 config='serverDZ.cfg' # Sets which server configuration file to use when loading the server.
