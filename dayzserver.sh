@@ -18,38 +18,40 @@ startServer () {
     cd .steam/steamapps/common/"$folder" || return
     tmux new-session -d -s "$session"
     tmux send-keys -t "$session" "./DayZServer -config=$config -port=$port -limitFPS=$fps -cpuCount=$cores" Enter
-    echo "INFO: Starting DayZ server. Please wait."
+    echo -e "\n\e[33m[!] INFOMSG\e[0m: Starting your DayZ server. Please wait a few moments."
     sleep 10
-    echo "INFO: Your server should now be ready to play. Please check the DayZ game client."
+    echo -e "\e[33m[!] INFOMSG\e[0m: Your server should now be ready to play. Please check the DayZ game client.\n"
 }
 
 # Restarts the DayZ Dedicated Server for Linux
 restartServer () {
     tmux kill-session -t "$session"
-    echo "INFO: Stopping DayZ server without notice. Players might be pissed."
+    echo -e "\n\e[33m[!] INFOMSG\e[0m: Stopping DayZ server without notice. Players might be pissed."
     sleep 10
-    echo "INFO: Server should be stopped now. Restart will occur in 10 seconds."
+    echo -e "\e[33m[!] INFOMSG\e[0m: Server should be stopped now. Restart will occur in 10 seconds."
     sleep 10
     cd .steam/steamapps/common/"$folder" || return
     tmux new-session -d -s "$session"
     tmux send-keys -t "$session" "./DayZServer -config=$config -port=$port -limitFPS=$fps -cpuCount=$cores" Enter
-    echo "INFO: Starting DayZ server. Please wait."
+    echo -e "\n\e[33m[!] INFOMSG\e[0m: Now restarting your DayZ server. Please wait."
     sleep 10
-    echo "INFO: Your server should now be ready to play. Please check the DayZ game client."
+    echo -e "\e[33m[!] INFOMSG\e[0m: Your server should now be ready to play. Please check the DayZ game client.\n"
 }
+
 
 # Shutsdown the DayZ Dedicated Server for Linux, kinda like you evertim in League of Legends
 shutdownServer () {
     tmux kill-session -t "$session"
-    echo "INFO: Stopping DayZ server without notice. Players might be pissed."
+    echo -e "\n\e[33m[!] INFOMSG\e[0m: Stopping DayZ server without notice. Players might be pissed."
     sleep 10
-    echo "INFO: Server should be stopped now. Good luck."
+    echo -e "\n\e[33m[!] INFOMSG\e[0m: Server should be stopped now. Good luck.\n"
 }
 
 # Checks SteamCMD for an update to DayZ Server or DayZ Server Exp
 updateServer () {
+    echo -e "\n[33m[!] INFOMSG\e[0m: Starting update process via SteamCMD. Please wait a few moments."
     steamcmd +login anonymous +app_update $appid validate +quit
-    echo "Update has been completed. You can now start your server."
+    echo -e "\e[33m[!] INFOMSG\e[0m: Update has been completed. You can now start your server.\n"
 }
 
 helpText ()
@@ -60,19 +62,30 @@ helpText ()
    echo -e "\tRESTART Restarts the DayZ Dedicated Server for Linux"
    echo -e "\tSHUTDOWN Shutsdown the DayZ Dedicated Server for Linux, kinda like you evertim in League of Legends"
    echo -e "\tUPDATE Checks SteamCMD for an update to DayZ Server or DayZ Server Exp"
-   exit 1 # Exit script after printing help
+   return 0 # Exit script after printing help
 }
-
-read input 
-if [[ $input == "start" ]]; then
-    startServer
-fi
-if [[ $input == "restart" ]]; then
-    restartServer
-fi
-if [[ $input == "shutdown" ]]; then
-    shutdownServer
-fi
-if [[ $input == "update" ]]; then
-    updateServer
-fi
+echo -e "\n\n\e[92m==========================================================\e[0m"
+echo -e "DAYZ LINUX SERVER MANAGEMENT SCRIPT V1.0 BY HYP3RSTRIKE"
+echo -e "\e[92m==========================================================\e[0m\n"
+echo -e "# This script is brought to you by hyperfocus and ADHD."
+echo -e "# For any updates, please visit https://github.com/hyp3rstrike/DayZServer_LinuxMgr or follow me on Twitter @HYP3RSTRIKE"
+echo -e "# COMMANDS: [\e[32mstart\e[0m] [\e[33mrestart\e[0m] [\e[31mshutdown\e[0m] [\e[36mupdate\e[0m] [\e[37mhelp\e[0m]"
+echo -e "\nWHAT WOULD YOU LIKE TO DO?: "
+read servercmds
+    case $servercmds in
+    start)
+        startServer
+        ;;
+    restart)
+        restartServer
+        ;;
+    shutdown)
+        shutdownServer
+        ;;
+    update)
+        updateServer
+        ;;
+    *)
+        helpText
+        ;;
+esac
