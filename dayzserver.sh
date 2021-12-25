@@ -21,7 +21,7 @@ startServer () {
     tmux send-keys -t "$session" "./DayZServer -config=$config -port=$port -limitFPS=$fps -cpuCount=$cores" Enter
     echo -e "\n\e[33m[!] INFOMSG\e[0m: Starting your DayZ server. Please wait a few moments."
     sleep 10
-    echo -e "\e[33m[!] INFOMSG\e[0m: Your server should now be ready to play. Please check the DayZ game client.\n"
+    echo -e "\e[33m[!] INFOMSG\e[0m: Your server is now running on port $port and should now be ready to play. Please check the DayZ game client.\n"
 }
 
 # Restarts the DayZ Dedicated Server for Linux
