@@ -11,6 +11,7 @@ config='serverDZ.cfg' # Sets which server configuration file to use when loading
 port='2302' # Sets which port to listen in on when the server is running.
 fps='60' # Sets a max framerate for the server. Max value is 200. Set to lower values if your server performance is shit.
 cores='1' # Sets how many cores of your server CPU to use. Should always be a lower value than the max cores your CPU has.
+steamid = "anonymous" # Sets your steamc ID. Stable build can't be downloaded with anonymous option.
 
 # [!] DO NOT ALTER ANYTHING BEYOND THIS LINE [!]
 
@@ -51,7 +52,7 @@ shutdownServer () {
 # Checks SteamCMD for an update to DayZ Server or DayZ Server Exp
 updateServer () {
     echo -e "\n\e[33m[!] INFOMSG\e[0m: Starting update process via SteamCMD. Please wait a few moments.\n\n"
-    steamcmd +login anonymous +app_update $appid validate +quit
+    steamcmd +login $steamid +app_update $appid validate +quit
     echo -e "\n\e[33m[!] INFOMSG\e[0m: Update has been completed. You can now start your server.\n"
 }
 
