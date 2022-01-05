@@ -11,9 +11,9 @@ Assuming you've set it up correctly using SteamCMD under it's own user and home 
 
 1. Login as the Steam user.
 2. Do ``chmod +x dayzserver.sh`` in your terminal window.
-3. Run ``./dayzserver.sh`` and wait for the prompts to do the thing.
+3. Run ``./dayzserver.sh [option]`` and let it do its thing.
 
-### Parameters
+### Options
 * **start** - Starts the DayZ Server with the parameters defined at the top of the script.
 * **restart** - Automates a restart of the server, using the parameters at the top of the script.
 * **shutdown** - Sends a kill request to the TMUX session that the 
